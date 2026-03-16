@@ -77,6 +77,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
   const sidebarRef = useRef<HTMLElement>(null);
   const iconRefs = useRef<(HTMLDivElement | null)[]>([]);
   const labelRefs = useRef<(HTMLSpanElement | null)[]>([]);
+  const themeIconRef = useRef<HTMLDivElement | null>(null);
   const expandTlRef = useRef<gsap.core.Timeline | null>(null);
 
   const { theme, toggleTheme, mounted } = useTheme();
@@ -193,13 +194,13 @@ export const Sidebar: React.FC<SidebarProps> = ({
   };
 
   const handleThemeToggle = () => {
-    const themeToggleRef = iconRefs.current[navItems.length];
-    if (themeToggleRef) {
-      gsap.fromTo(
-        themeToggleRef,
-        { rotate: 0 },
-        { rotate: 180, duration: 0.35, ease: 'power2.out', yoyo: true, repeat: 1, overwrite: 'auto' }
-      );
+    if (themeIconRef.current) {
+      gsap.to(themeIconRef.current, {
+        rotate: theme === 'dark' ? 0 : 35,
+        duration: 0.3,
+        ease: 'power2.out',
+        overwrite: 'auto',
+      });
     }
     toggleTheme();
   };
@@ -272,11 +273,17 @@ export const Sidebar: React.FC<SidebarProps> = ({
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
           >
-            {theme === 'dark' ? (
-              <Sun size={24} strokeWidth={2.25} className="shrink-0" />
-            ) : (
-              <Moon size={24} strokeWidth={2.25} className="shrink-0" />
-            )}
+            <div
+              ref={themeIconRef}
+              className="shrink-0 transition-transform duration-300"
+              style={{ transform: `rotate(${theme === 'dark' ? 0 : 35}deg)` }}
+            >
+              {theme === 'dark' ? (
+                <Sun size={24} strokeWidth={2.25} />
+              ) : (
+                <Moon size={24} strokeWidth={2.25} />
+              )}
+            </div>
             <span
               ref={(el) => { labelRefs.current[navItems.length] = el; }}
               className={`
