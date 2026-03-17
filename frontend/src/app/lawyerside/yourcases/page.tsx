@@ -240,7 +240,10 @@ export default function YourCasesKanban() {
   // ── Render ─────────────────────────────────────────────
   return (
     <div className="flex min-h-screen bg-gray-50 dark:bg-[#0f1e3f]">
-      <div className="md:sticky md:top-0 md:h-screen shrink-0 z-50">
+      <div className="hidden md:block md:sticky md:top-0 md:h-screen shrink-0 z-50">
+        <Sidebar navItems={LAWYER_NAV_ITEMS} />
+      </div>
+      <div className="md:hidden">
         <Sidebar navItems={LAWYER_NAV_ITEMS} />
       </div>
 
