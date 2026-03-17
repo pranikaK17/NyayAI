@@ -86,6 +86,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
   themeColors = {},
 }) => {
   const [isExpanded, setIsExpanded] = useState(false);
+  const [isReady, setIsReady] = useState(false);
 
   // Restore expanded state from localStorage on mount (client-side only)
   useEffect(() => {
@@ -98,8 +99,11 @@ export const Sidebar: React.FC<SidebarProps> = ({
         const stored = localStorage.getItem('sidebarExpanded');
         if (stored === 'true') {
           setIsExpanded(true);
+        } else {
+          setIsExpanded(false);
         }
       }
+      setIsReady(true);
     }
   }, []);
   const sidebarRef = useRef<HTMLElement>(null);
@@ -228,7 +232,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
     });
 
     return () => mm.revert();
-  }, { dependencies: [isExpanded, mounted], scope: sidebarRef });
+  }, { dependencies: [isExpanded, mounted, isReady], scope: sidebarRef });
 
   // GSAP Hover Effects
   const handleMouseEnter = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -287,18 +291,24 @@ export const Sidebar: React.FC<SidebarProps> = ({
       <div 
         ref={backdropRef}
         className="fixed inset-0 bg-black/40 backdrop-blur-sm z-[45] md:hidden opacity-0 pointer-events-none"
-        onClick={() => setIsExpanded(false)}
+        onClick={() => {
+          setIsExpanded(false);
+          if (typeof window !== 'undefined') {
+            localStorage.setItem('sidebarExpanded', 'false');
+          }
+        }}
       />
 
       <aside
         ref={sidebarRef}
         style={dynamicStyles}
         className={`
-          fixed top-0 left-0 h-full w-[240px] transition-colors duration-300 ease-in-out z-50
+          fixed top-0 left-0 h-full w-[90px] transition-colors duration-300 ease-in-out z-50
           md:relative md:h-full md:flex-col md:rounded-none md:shadow-none md:py-10 md:px-0 md:overflow-visible
           flex flex-col py-6 px-4
           bg-[var(--sb-bg-light)] dark:bg-[var(--sb-bg-dark)] 
           text-[var(--sb-text-light)] dark:text-[var(--sb-text-dark)] 
+          ${!isReady && 'opacity-0'}
         `}
       >
       {/* Top / Main Navigation Items */}
