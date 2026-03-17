@@ -3,9 +3,18 @@ import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { supabase } from '@/lib/supabase/client';
 import { Json, Database } from '@/types/supabase';
-import { Sidebar } from '../../../../components/sidebar';
+import { Sidebar, type NavItem } from '../../../../components/sidebar';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
+
+import { Menu, Home, Store, Gavel } from 'lucide-react';
+
+const LAWYER_NAV_ITEMS: NavItem[] = [
+  { id: 'menu', icon: Menu, label: 'Menu' },
+  { id: 'home', icon: Home, label: 'Home', href: '/lawyerside/home' },
+  { id: 'marketplace', icon: Store, label: 'Marketplace', href: '/lawyerside/marketplace' },
+  { id: 'my-cases', icon: Gavel, label: 'My Cases', href: '/lawyerside/my-cases' },
+]
 
 export default function RedirectToHome() {
   const router = useRouter();
@@ -163,8 +172,11 @@ export default function RedirectToHome() {
   return (
     <div className="flex bg-gray-50 dark:bg-[#0f1e3f] font-sans h-screen overflow-hidden text-gray-900 dark:text-white transition-colors duration-300" ref={containerRef}>
       {/* Sidebar Navigation */}
-      <div className="shrink-0 h-screen z-50 md:sticky md:top-0 shadow-[4px_0_24px_rgba(0,0,0,0.05)] dark:shadow-none bg-white dark:bg-[#0a152e]">
-        <Sidebar showProfileButton={true} onProfileClick={handleProfileClick} />
+      <div className="hidden md:block md:sticky md:top-0 md:h-screen shrink-0 z-[1000]">
+        <Sidebar navItems={LAWYER_NAV_ITEMS} showProfileButton={true} onProfileClick={handleProfileClick} />
+      </div>
+      <div className="md:hidden relative z-[1000]">
+        <Sidebar navItems={LAWYER_NAV_ITEMS} showProfileButton={true} onProfileClick={handleProfileClick} />
       </div>
 
       {/* Main Content Area */}
