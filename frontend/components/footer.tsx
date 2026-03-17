@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
-import { Aperture, Mail, Linkedin, Instagram, Facebook } from 'lucide-react';
+import { Aperture, Mail, Linkedin, Instagram, Facebook, type LucideIcon } from 'lucide-react';
 
 // ==========================================
 // 1. EXPORTED INTERFACES
@@ -14,7 +14,7 @@ export interface ColorSwatch {
 }
 
 export interface SocialLink {
-  icon: React.ElementType<{ size?: number; strokeWidth?: number; className?: string }>;
+  icon: LucideIcon;
   url: string;
   ariaLabel: string;
 }
@@ -33,8 +33,13 @@ export interface FooterThemeColors {
 export interface FooterProps {
   /** Logo configuration */
   logoText?: string;
+<<<<<<< HEAD
   logoIcon?: React.ElementType<{ size?: number; strokeWidth?: number; className?: string }>;
 
+=======
+  logoIcon?: LucideIcon;
+  
+>>>>>>> d81799a8b273c6a2dbaabbd1fb70c796dcb5754d
   /** Newsletter configuration */
   subscribePlaceholder?: string;
   subscribeButtonText?: string;
