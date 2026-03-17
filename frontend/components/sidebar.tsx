@@ -76,6 +76,16 @@ export const Sidebar: React.FC<SidebarProps> = ({
   themeColors = {},
 }) => {
   const [isExpanded, setIsExpanded] = useState(false);
+
+  // Restore expanded state from localStorage on mount (client-side only)
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const stored = localStorage.getItem('sidebarExpanded');
+      if (stored === 'true') {
+        setIsExpanded(true);
+      }
+    }
+  }, []);
   const sidebarRef = useRef<HTMLElement>(null);
   const iconRefs = useRef<(HTMLDivElement | null)[]>([]);
   const labelRefs = useRef<(HTMLSpanElement | null)[]>([]);
@@ -210,7 +220,13 @@ export const Sidebar: React.FC<SidebarProps> = ({
   };
 
   const handleMenuToggle = () => {
-    setIsExpanded((prev) => !prev);
+    setIsExpanded((prev) => {
+      const next = !prev;
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('sidebarExpanded', String(next));
+      }
+      return next;
+    });
   };
 
   return (
