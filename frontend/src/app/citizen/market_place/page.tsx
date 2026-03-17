@@ -349,14 +349,14 @@ function MarketplaceContent() {
   // ── Render ─────────────────────────────────────────────
   return (
     <div className="flex min-h-screen bg-gray-50 dark:bg-[#0f1e3f]">
-      <div className="hidden md:block md:sticky md:top-0 md:h-screen shrink-0 z-50">
+      <div className="hidden md:block md:sticky md:top-0 md:h-screen shrink-0 z-[1000]">
         <Sidebar />
       </div>
-      <div className="md:hidden">
+      <div className="md:hidden relative z-[1000]">
         <Sidebar />
       </div>
 
-      <div className="flex-1 max-w-[1200px] mx-auto p-6 md:p-10 text-gray-900 dark:text-white font-serif">
+      <div className="flex-1 max-w-[1200px] mx-auto pt-20 px-6 pb-6 md:p-10 text-gray-900 dark:text-white font-serif">
 
         {/* Header */}
         <div className="mb-10">

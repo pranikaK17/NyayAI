@@ -418,13 +418,13 @@ export default function CaseHistory() {
       ref={pageRef}
       className="flex min-h-screen bg-gray-50 dark:bg-[#0f1e3f] transition-colors duration-300"
     >
-      <div className="hidden md:block md:sticky md:top-0 md:h-screen shrink-0 z-50">
+      <div className="hidden md:block md:sticky md:top-0 md:h-screen shrink-0 z-[1000]">
         <Sidebar />
       </div>
-      <div className="md:hidden">
+      <div className="md:hidden relative z-[1000]">
         <Sidebar />
       </div>
-      <div className="flex-1 max-w-[1200px] mx-auto p-6 md:p-8 text-gray-900 dark:text-white flex flex-col pb-24 md:pb-8">
+      <div className="flex-1 max-w-[1200px] mx-auto pt-20 px-6 pb-24 md:p-8 text-gray-900 dark:text-white flex flex-col md:pb-8">
         {/* Header */}
         <div className="mb-6 relative z-[120] flex items-start justify-between gap-4 shrink-0">
           <div className="min-w-0 flex-1">

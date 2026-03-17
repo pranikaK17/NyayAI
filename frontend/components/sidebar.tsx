@@ -304,7 +304,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
       {/* Mobile Menu Toggle Button - Only visible on mobile */}
       <button
         onClick={handleMenuToggle}
-        className="fixed top-4 left-4 z-[60] p-3 rounded-full bg-[var(--sb-bg-light)] dark:bg-[var(--sb-bg-dark)] text-[var(--sb-text-light)] dark:text-[var(--sb-text-dark)] shadow-lg md:hidden border border-[var(--sb-text-light)]/20 dark:border-[var(--sb-text-dark)]/20 active:scale-90 transition-transform duration-200"
+        className="fixed top-4 left-4 z-[1100] p-3 rounded-full bg-[var(--sb-bg-light)] dark:bg-[var(--sb-bg-dark)] text-[var(--sb-text-light)] dark:text-[var(--sb-text-dark)] shadow-lg md:hidden border border-[var(--sb-text-light)]/20 dark:border-[var(--sb-text-dark)]/20 active:scale-90 transition-transform duration-200"
         style={dynamicStyles}
       >
         <Menu size={20} />
@@ -313,7 +313,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
       {/* Backdrop for mobile drawer */}
       <div 
         ref={backdropRef}
-        className="fixed inset-0 bg-black/40 backdrop-blur-sm z-[45] md:hidden opacity-0 pointer-events-none"
+        className="fixed inset-0 bg-black/40 backdrop-blur-sm z-[999] md:hidden opacity-0 pointer-events-none"
         onClick={() => {
           setIsExpanded(false);
           if (typeof window !== 'undefined') {
@@ -326,7 +326,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
         ref={sidebarRef}
         style={dynamicStyles}
         className={`
-          fixed top-0 left-0 h-full w-[90px] transition-colors duration-300 ease-in-out z-50
+          fixed top-0 left-0 h-full w-[90px] transition-colors duration-300 ease-in-out z-[1000]
           md:relative md:h-full md:flex-col md:rounded-none md:shadow-none md:py-10 md:px-0 md:overflow-visible
           flex flex-col py-6 px-4
           bg-[var(--sb-bg-light)] dark:bg-[var(--sb-bg-dark)] 
