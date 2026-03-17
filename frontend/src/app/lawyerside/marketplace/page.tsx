@@ -612,10 +612,15 @@ export default function LawyerCaseMarketplace() {
     : incomingDispatches.map((d) => d.caseData)
 
   const domainOptions = useMemo(() => {
+    const lawyerSpecs = new Set<string>(lawyerProfile?.specialisations ?? [])
     const domains = new Set<string>()
-    activeCaseList.forEach(c => domains.add(c.domain))
+    activeCaseList.forEach(c => {
+      if (lawyerSpecs.size === 0 || lawyerSpecs.has(c.domain)) {
+        domains.add(c.domain)
+      }
+    })
     return Array.from(domains).sort()
-  }, [activeCaseList])
+  }, [activeCaseList, lawyerProfile])
 
   // ── Filtered results (Available Cases) ─────────────────
   const filteredCases = useMemo(() => {
