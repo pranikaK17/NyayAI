@@ -94,11 +94,11 @@ function formatStage(stage: string | null): string {
 
 function stageColor(stage: string | null): string {
   switch (stage) {
-    case 'accepted':    return 'bg-emerald-500/20 text-emerald-700'
-    case 'active':      return 'bg-blue-500/20 text-blue-700'
-    case 'completed':   return 'bg-purple-500/20 text-purple-700'
-    case 'withdrawn':   return 'bg-gray-500/20 text-gray-600'
-    default:            return 'bg-amber-500/20 text-amber-700'
+    case 'accepted': return 'bg-emerald-500/20 text-emerald-700'
+    case 'active': return 'bg-blue-500/20 text-blue-700'
+    case 'completed': return 'bg-purple-500/20 text-purple-700'
+    case 'withdrawn': return 'bg-gray-500/20 text-gray-600'
+    default: return 'bg-amber-500/20 text-amber-700'
   }
 }
 
@@ -110,38 +110,38 @@ const LAWYER_NAV_ITEMS: NavItem[] = [
 ];
 
 const DOMAIN_LABELS: Record<string, string> = {
-  consumer:              'Consumer Disputes',
-  tenant:                'Tenant / Rent',
-  labour:                'Labour & Employment',
-  criminal:              'Criminal Law',
-  cyber:                 'Cyber Crime',
-  property:              'Property Law',
-  family:                'Family Law',
-  rti:                   'RTI',
-  corruption:            'Anti-Corruption',
-  civil:                 'Civil Law',
-  other:                 'General Practice',
-  tax:                   'Tax Law',
-  corporate:             'Corporate / Business',
+  consumer: 'Consumer Disputes',
+  tenant: 'Tenant / Rent',
+  labour: 'Labour & Employment',
+  criminal: 'Criminal Law',
+  cyber: 'Cyber Crime',
+  property: 'Property Law',
+  family: 'Family Law',
+  rti: 'RTI',
+  corruption: 'Anti-Corruption',
+  civil: 'Civil Law',
+  other: 'General Practice',
+  tax: 'Tax Law',
+  corporate: 'Corporate / Business',
   intellectual_property: 'Intellectual Property',
-  constitutional:        'Constitutional / PIL',
-  banking_finance:       'Banking & Finance',
-  insurance:             'Insurance',
-  matrimonial:           'Matrimonial',
-  immigration:           'Immigration',
-  environmental:         'Environmental Law',
-  medical_negligence:    'Medical Negligence',
-  motor_accident:        'Motor Accident Claims',
-  cheque_bounce:         'Cheque Bounce (NI Act)',
-  debt_recovery:         'Debt Recovery',
-  arbitration:           'Arbitration & ADR',
-  service_matters:       'Service Matters',
-  land_acquisition:      'Land Acquisition',
-  wills_succession:      'Wills & Succession',
-  domestic_violence:     'Domestic Violence',
-  pocso:                 'POCSO',
-  sc_st_atrocities:      'SC/ST Atrocities Act',
-  divorce:               'Divorce',
+  constitutional: 'Constitutional / PIL',
+  banking_finance: 'Banking & Finance',
+  insurance: 'Insurance',
+  matrimonial: 'Matrimonial',
+  immigration: 'Immigration',
+  environmental: 'Environmental Law',
+  medical_negligence: 'Medical Negligence',
+  motor_accident: 'Motor Accident Claims',
+  cheque_bounce: 'Cheque Bounce (NI Act)',
+  debt_recovery: 'Debt Recovery',
+  arbitration: 'Arbitration & ADR',
+  service_matters: 'Service Matters',
+  land_acquisition: 'Land Acquisition',
+  wills_succession: 'Wills & Succession',
+  domestic_violence: 'Domestic Violence',
+  pocso: 'POCSO',
+  sc_st_atrocities: 'SC/ST Atrocities Act',
+  divorce: 'Divorce',
 }
 
 function formatDomain(domain: string): string {
@@ -150,8 +150,8 @@ function formatDomain(domain: string): string {
 
 function formatBudget(min: number | null, max: number | null): string {
   if (!min && !max) return 'Budget not specified'
-  if (min && !max)  return `From ₹${min.toLocaleString('en-IN')}`
-  if (!min && max)  return `Up to ₹${max.toLocaleString('en-IN')}`
+  if (min && !max) return `From ₹${min.toLocaleString('en-IN')}`
+  if (!min && max) return `Up to ₹${max.toLocaleString('en-IN')}`
   return `₹${min!.toLocaleString('en-IN')} – ₹${max!.toLocaleString('en-IN')}`
 }
 
@@ -163,24 +163,24 @@ function formatDate(dateStr: string | null): string {
 function timeAgo(dateStr: string | null): string {
   if (!dateStr) return 'Unknown'
   const diff = Date.now() - new Date(dateStr).getTime()
-  const mins  = Math.floor(diff / 60000)
-  if (mins < 60)  return `${mins}m ago`
+  const mins = Math.floor(diff / 60000)
+  if (mins < 60) return `${mins}m ago`
   const hours = Math.floor(mins / 60)
   if (hours < 24) return `${hours}h ago`
   const days = Math.floor(hours / 24)
-  if (days < 30)  return `${days}d ago`
+  if (days < 30) return `${days}d ago`
   return `${Math.floor(days / 30)}mo ago`
 }
 
 const allBudgetLabels = [
-  '₹0','₹5k','₹10k','₹20k','₹30k','₹50k','₹75k','₹1L','₹1.5L','₹2L','₹3L','₹5L+'
+  '₹0', '₹5k', '₹10k', '₹20k', '₹30k', '₹50k', '₹75k', '₹1L', '₹1.5L', '₹2L', '₹3L', '₹5L+'
 ]
 
 function parseBudget(str: string): number {
   if (!str || str === '₹0') return 0
   if (str === '₹5L+') return 999999999
-  if (str.includes('k'))  return parseInt(str.replace('₹','').replace('k','')) * 1000
-  if (str.includes('L'))  return parseFloat(str.replace('₹','').replace('L','')) * 100000
+  if (str.includes('k')) return parseInt(str.replace('₹', '').replace('k', '')) * 1000
+  if (str.includes('L')) return parseFloat(str.replace('₹', '').replace('L', '')) * 100000
   return 0
 }
 
@@ -188,14 +188,14 @@ export default function LawyerCaseMarketplace() {
   const router = useRouter()
   const briefDispatchClient = supabase as unknown as BriefDispatchClient
   const [lawyerProfile, setLawyerProfile] = useState<LawyerProfilePreview | null>(null)
-  const [allCases, setAllCases]             = useState<CasePreview[]>([])
+  const [allCases, setAllCases] = useState<CasePreview[]>([])
   const [incomingDispatches, setIncomingDispatches] = useState<IncomingDispatch[]>([])
-  const [isLoading, setIsLoading]           = useState(true)
+  const [isLoading, setIsLoading] = useState(true)
   const [offeredLoading, setOfferedLoading] = useState(true)
-  const [dbError, setDbError]               = useState<string | null>(null)
-  const [offeredError, setOfferedError]     = useState<string | null>(null)
-  const [hoveredCard, setHoveredCard]       = useState<string | null>(null)
-  const [activeTab, setActiveTab]           = useState<'left' | 'right'>('left')
+  const [dbError, setDbError] = useState<string | null>(null)
+  const [offeredError, setOfferedError] = useState<string | null>(null)
+  const [hoveredCard, setHoveredCard] = useState<string | null>(null)
+  const [activeTab, setActiveTab] = useState<'left' | 'right'>('left')
   const [acceptingCaseId, setAcceptingCaseId] = useState<string | null>(null)
   const [now, setNow] = useState<number>(0)
   const [selectedAvailable, setSelectedAvailable] = useState<CasePreview | null>(null)
@@ -377,11 +377,11 @@ export default function LawyerCaseMarketplace() {
       prev.map((d) =>
         d.dispatch.id === incoming.dispatch.id
           ? {
-              ...d,
-              dispatch: { ...d.dispatch, status: 'offered' },
-              offerStage: 'offered',
-              offerSentAt: new Date().toISOString(),
-            }
+            ...d,
+            dispatch: { ...d.dispatch, status: 'offered' },
+            offerStage: 'offered',
+            offerSentAt: new Date().toISOString(),
+          }
           : d
       )
     )
@@ -422,22 +422,22 @@ export default function LawyerCaseMarketplace() {
   const [selectedBudgetIndex, setSelectedBudgetIndex] = useState<number>(allBudgetLabels.length - 1)
 
   // ── Domain dropdown ────────────────────────────────────
-  const [isDomainOpen, setIsDomainOpen]       = useState(false)
-  const [selectedDomain, setSelectedDomain]   = useState('Legal Domain')
-  const dropdownRef                           = useRef<HTMLDivElement>(null)
-  const dropdownContentRef                    = useRef<HTMLDivElement>(null)
+  const [isDomainOpen, setIsDomainOpen] = useState(false)
+  const [selectedDomain, setSelectedDomain] = useState('Legal Domain')
+  const dropdownRef = useRef<HTMLDivElement>(null)
+  const dropdownContentRef = useRef<HTMLDivElement>(null)
 
   // ── Recency dropdown ───────────────────────────────────
-  const [isRecencyOpen, setIsRecencyOpen]       = useState(false)
-  const [selectedRecency, setSelectedRecency]   = useState('Any Time')
-  const recDropdownRef                          = useRef<HTMLDivElement>(null)
-  const recDropdownContentRef                   = useRef<HTMLDivElement>(null)
+  const [isRecencyOpen, setIsRecencyOpen] = useState(false)
+  const [selectedRecency, setSelectedRecency] = useState('Any Time')
+  const recDropdownRef = useRef<HTMLDivElement>(null)
+  const recDropdownContentRef = useRef<HTMLDivElement>(null)
 
   const recencyOptions = useMemo(() => [
-    { label: 'Last 24 hours',  ms: 24 * 60 * 60 * 1000 },
-    { label: 'Last 7 days',    ms: 7 * 24 * 60 * 60 * 1000 },
-    { label: 'Last 30 days',   ms: 30 * 24 * 60 * 60 * 1000 },
-    { label: 'Last 90 days',   ms: 90 * 24 * 60 * 60 * 1000 },
+    { label: 'Last 24 hours', ms: 24 * 60 * 60 * 1000 },
+    { label: 'Last 7 days', ms: 7 * 24 * 60 * 60 * 1000 },
+    { label: 'Last 30 days', ms: 30 * 24 * 60 * 60 * 1000 },
+    { label: 'Last 90 days', ms: 90 * 24 * 60 * 60 * 1000 },
   ], [])
 
   // ── Fetch lawyer profile + unassigned cases ────────────
@@ -487,17 +487,13 @@ export default function LawyerCaseMarketplace() {
       const assignedCaseIds = new Set((pipelineData ?? []).map(p => p.case_id))
 
       // 4. Fetch cases that are seeking a lawyer (Available tab)
-      let query = supabase
+      const query = supabase
         .from('cases')
         // keep citizen anonymous for lawyers: do not fetch citizen_id
         .select('id, title, domain, status, state, district, incident_description, incident_date, budget_min, budget_max, confidence_score, created_at')
         .eq('is_seeking_lawyer', true)
         .eq('status', 'seeking_lawyer')
         .order('created_at', { ascending: false })
-
-      if (specialisations.length > 0) {
-        query = query.in('domain', specialisations)
-      }
 
       const { data: casesData, error: casesError } = await query
 
@@ -551,11 +547,11 @@ export default function LawyerCaseMarketplace() {
         .order('created_at', { ascending: false })
 
       const latestPipelineByCase = new Map<string, { stage: PipelineRow['stage'] | null; offer_sent_at: string | null }>()
-      ;(pipelineForIncoming ?? []).forEach((row) => {
-        if (!latestPipelineByCase.has(row.case_id)) {
-          latestPipelineByCase.set(row.case_id, { stage: row.stage, offer_sent_at: row.offer_sent_at })
-        }
-      })
+        ; (pipelineForIncoming ?? []).forEach((row) => {
+          if (!latestPipelineByCase.has(row.case_id)) {
+            latestPipelineByCase.set(row.case_id, { stage: row.stage, offer_sent_at: row.offer_sent_at })
+          }
+        })
 
       const merged: IncomingDispatch[] = (dispatchRows as BriefDispatchRow[])
         .filter((d) => caseMap.has(d.case_id))
@@ -617,10 +613,15 @@ export default function LawyerCaseMarketplace() {
     : incomingDispatches.map((d) => d.caseData)
 
   const domainOptions = useMemo(() => {
+    const lawyerSpecs = new Set<string>(lawyerProfile?.specialisations ?? [])
     const domains = new Set<string>()
-    activeCaseList.forEach(c => domains.add(c.domain))
+    activeCaseList.forEach(c => {
+      if (lawyerSpecs.size === 0 || lawyerSpecs.has(c.domain)) {
+        domains.add(c.domain)
+      }
+    })
     return Array.from(domains).sort()
-  }, [activeCaseList])
+  }, [activeCaseList, lawyerProfile])
 
   // ── Filtered results (Available Cases) ─────────────────
   const filteredCases = useMemo(() => {
@@ -640,8 +641,8 @@ export default function LawyerCaseMarketplace() {
       }
     }
 
-    const idx   = Math.min(selectedBudgetIndex, allBudgetLabels.length - 1)
-    const maxB  = parseBudget(allBudgetLabels[idx] ?? '₹5L+')
+    const idx = Math.min(selectedBudgetIndex, allBudgetLabels.length - 1)
+    const maxB = parseBudget(allBudgetLabels[idx] ?? '₹5L+')
     result = result.filter(c => !c.budget_min || c.budget_min <= maxB)
 
     return result
@@ -665,8 +666,8 @@ export default function LawyerCaseMarketplace() {
       }
     }
 
-    const idx   = Math.min(selectedBudgetIndex, allBudgetLabels.length - 1)
-    const maxB  = parseBudget(allBudgetLabels[idx] ?? '₹5L+')
+    const idx = Math.min(selectedBudgetIndex, allBudgetLabels.length - 1)
+    const maxB = parseBudget(allBudgetLabels[idx] ?? '₹5L+')
     result = result.filter(o => !o.caseData.budget_min || o.caseData.budget_min <= maxB)
 
     return result.sort((a, b) => {
@@ -744,24 +745,15 @@ export default function LawyerCaseMarketplace() {
               Case Marketplace
             </h1>
             <p className="text-gray-600 dark:text-white/70 text-[15px] font-sans">
-              Browse unassigned cases matching your specialisations and send offers to represent clients.
+              Browse unassigned cases and send offers to represent clients.
             </p>
             {!(activeTab === 'left' ? isLoading : offeredLoading) && (
               <div className={`mt-3 inline-flex items-center gap-2 text-xs font-sans px-3 py-1 rounded-full ${activeTab === 'left' ? statusPillClass : (offeredError ? statusPillClass : statusPillClass)}`}>
                 <div className={`w-1.5 h-1.5 rounded-full ${activeTab === 'left' ? statusDotClass : (offeredError ? 'bg-red-500 dark:bg-red-400' : statusDotClass)}`} />
-              {activeTab === 'left'
-                ? (dbError ? `Error: ${dbError}` : `${filteredCases.length} of ${allCases.length} cases shown`)
-                : (offeredError ? `Error: ${offeredError}` : `${filteredDispatches.length} of ${incomingDispatches.length} requests shown`)
-              }
-              </div>
-            )}
-            {lawyerProfile && (
-              <div className="mt-2 flex flex-wrap gap-1.5">
-                {(lawyerProfile.specialisations ?? []).map(spec => (
-                  <span key={spec} className="px-2.5 py-0.5 bg-[#997953]/10 dark:bg-[#cdaa80]/15 rounded-full text-[11px] font-sans text-[#997953] dark:text-[#cdaa80] font-medium">
-                    {formatDomain(spec)}
-                  </span>
-                ))}
+                {activeTab === 'left'
+                  ? (dbError ? `Error: ${dbError}` : `${filteredCases.length} of ${allCases.length} cases shown`)
+                  : (offeredError ? `Error: ${offeredError}` : `${filteredDispatches.length} of ${incomingDispatches.length} requests shown`)
+                }
               </div>
             )}
           </div>
@@ -1138,12 +1130,7 @@ export default function LawyerCaseMarketplace() {
                           <div className="flex gap-2 flex-wrap">
                             <button
                               type="button"
-                              onClick={(e) => { 
-                                e.stopPropagation(); 
-                                const entry = incomingDispatches.find(d => d.dispatch.id === dispatch.id);
-                                if (entry) setSelectedDispatch(entry);
-                                else setSelectedDispatch({ dispatch, caseData, offerStage: null, offerSentAt: null });
-                              }}
+                              onClick={(e) => { e.stopPropagation(); setSelectedDispatch({ dispatch, caseData }) }}
                               className={`md:hidden px-5 py-1.5 border border-[#0f1e3f]/30 rounded-lg text-sm font-medium font-sans transition-all duration-300 text-center mt-2 w-full max-w-[160px] ${hoveredCard === dispatch.id ? 'bg-[#0f1e3f] text-[#cdaa80]' : 'hover:bg-[#0f1e3f]/5'}`}
                             >
                               View case
@@ -1154,9 +1141,7 @@ export default function LawyerCaseMarketplace() {
                                 e.stopPropagation()
                                 setOfferAmountInput('25000')
                                 setOfferMessageInput('Scope, timeline, engagement type, and next steps...')
-                                const entry = incomingDispatches.find(d => d.dispatch.id === dispatch.id);
-                                if (entry) setSelectedDispatch(entry);
-                                else setSelectedDispatch({ dispatch, caseData, offerStage: null, offerSentAt: null });
+                                setSelectedDispatch({ dispatch, caseData })
                               }}
                               disabled={isOfferSent}
                               className={`md:hidden px-5 py-1.5 border border-[#0f1e3f]/30 rounded-lg text-sm font-medium font-sans transition-all duration-300 text-center mt-2 w-full max-w-[180px] ${hoveredCard === dispatch.id ? 'bg-[#0f1e3f] text-[#cdaa80]' : 'hover:bg-[#0f1e3f]/5'} disabled:opacity-60`}
@@ -1179,8 +1164,8 @@ export default function LawyerCaseMarketplace() {
                         <div className="flex gap-2">
                           <button
                             type="button"
-                            onClick={(e) => { 
-                              e.stopPropagation(); 
+                            onClick={(e) => {
+                              e.stopPropagation();
                               const entry = incomingDispatches.find(d => d.dispatch.id === dispatch.id);
                               if (entry) setSelectedDispatch(entry);
                               else setSelectedDispatch({ dispatch, caseData, offerStage: null, offerSentAt: null });
@@ -1329,11 +1314,11 @@ export default function LawyerCaseMarketplace() {
                       View packaged brief (AI brief + requirements + documents)
                     </summary>
                     <pre className="mt-3 text-[11px] leading-relaxed whitespace-pre-wrap break-words font-mono text-[#2f261f]/80 dark:text-white/70 max-h-[260px] overflow-auto">
-{JSON.stringify({
-  ai_brief: selectedDispatch.dispatch.ai_brief,
-  citizen_inputs: selectedDispatch.dispatch.citizen_inputs,
-  documents: selectedDispatch.dispatch.documents,
-}, null, 2)}
+                      {JSON.stringify({
+                        ai_brief: selectedDispatch.dispatch.ai_brief,
+                        citizen_inputs: selectedDispatch.dispatch.citizen_inputs,
+                        documents: selectedDispatch.dispatch.documents,
+                      }, null, 2)}
                     </pre>
                   </details>
 
@@ -1388,7 +1373,8 @@ export default function LawyerCaseMarketplace() {
           </Dialog.Portal>
         </Dialog.Root>
 
-        <style dangerouslySetInnerHTML={{ __html: `
+        <style dangerouslySetInnerHTML={{
+          __html: `
           .custom-scrollbar::-webkit-scrollbar { width: 5px; }
           .custom-scrollbar::-webkit-scrollbar-track { background: #f3eadf; border-radius: 8px; }
           .custom-scrollbar::-webkit-scrollbar-thumb { background-color: rgba(153,121,83,0.35); border-radius: 8px; }
